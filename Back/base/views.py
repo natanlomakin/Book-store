@@ -1,5 +1,5 @@
 from urllib import request
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from .models import AllBooks, Loans
 from rest_framework.response import Response
@@ -8,8 +8,10 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-#from .serializers import NoteSerializer
-#from base.models import Note
+from .serializers import APIsSerializer
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework import status
+from rest_framework.views import APIView
 
 
 def index(request):

@@ -20,9 +20,10 @@ const buildDisplay = async () => {
       (item, ind) => `<div> 
         <div class="col">
           <div class="card h-100">
-          <img src="https://picsum.photos/20${ind}" class="card-img-top" alt="...">
+          <img src="${MY_SERVER + "media/" + item.image}" class="card-img-top" alt="...">
           <div class="card-body">
               <h5 class="card-title">${item.title} </h5>
+              <h6 class="card-subtitle mb-2 text-muted">Author: ${item.author} <br>Genre: ${item.genre}</h6>
               <p class="card-text">${item.desc} <br><button class="btn btn-success" onclick="loan(${item.id})">Add</button></p>
           </div>
           </div>
@@ -86,19 +87,20 @@ const getMyBooks = async () => {
       Authorization: `Bearer ${token}`,
     },
   });
+  
   cart = cart.data
   console.log(cart)
   myBooksCart.innerHTML =  "<h1>My loaned books</h1> <br> <div class='row row-cols-1 row-cols-md-2 g-4' style='max-width: 540px;'>" +
   cart.map(
       (item) => `<div class="row g-0">
       <div class="col-md-4">
-        <img src="https://picsum.photos/20${item.id}" class="img-fluid rounded-start" alt="...">
+        <img src="${MY_SERVER + "media/" + item.image}" class="img-fluid rounded-start" alt="...">
       </div>
       <div class="col-md-8">
         <div class="card-body">
           <h5 class="card-title">${item.title}</h5>
           <p class="card-text">${item.desc}</p>
-          <p class="card-text"><small class="text-muted">${getDate(item.createdTime)}</small></p>
+          <p class="card-text"><small class="text-muted">Loan date: ${(item.createdTime).slice(0, 10)}</small></p>
         </div>
       </div>
     </div>`
@@ -108,12 +110,13 @@ const getMyBooks = async () => {
 };
 
 // try to make a return book date
-const getDate = (date) => {
-  dateDay = (date.slice(8, 10)) + 5
+/* const getDate = (date) => {
+  dateDay = parseInt((date.slice(8, 10))) + 15
   dateMonth = date.slice(5, 7)
   dateYear = date.slice(0, 4)
+  
   console.log(dateDay, dateMonth, dateYear)
-}
+} */
 {/* <div class='card mb-3' style='max-width: 540px;'>
   <div class="row g-0">
     <div class="col-md-4">
